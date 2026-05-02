@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Expense &amp; Budget Visualizer</title>
+    <link rel="stylesheet" href="css/styles.css" />
+    <!-- Both scripts use `defer` so they execute after the DOM is fully parsed.
+         This ensures #balance-display and #input-section are available when
+         app.js runs, without blocking their initial render. The Chart.js CDN
+         loads over HTTPS regardless of whether the page is opened via file://,
+         so there are no CORS issues with local assets. Requirements: 7.2, 8.3 -->
+    <script defer src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script defer src="js/app.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Expense &amp; Budget Visualizer</h1>
+      <div id="balance-display">Total: $0.00</div>
+    </header>
+    <main>
+      <section id="input-section">
+        <form id="transaction-form">
+          <input type="text" id="item-name" placeholder="Item name" />
+          <span id="name-error" class="error"></span>
+          <input type="number" id="item-amount" min="0.01" step="0.01" placeholder="Amount" />
+          <span id="amount-error" class="error"></span>
+          <select id="item-category">
+            <option value="">Select category</option>
+            <option value="Food">Food</option>
+            <option value="Transport">Transport</option>
+            <option value="Fun">Fun</option>
+          </select>
+          <span id="category-error" class="error"></span>
+          <button type="submit">Add Transaction</button>
+        </form>
+      </section>
+      <section id="chart-section">
+        <canvas id="spending-chart"></canvas>
+        <p id="chart-placeholder">No transactions yet.</p>
+      </section>
+      <section id="list-section">
+        <ul id="transaction-list"></ul>
+      </section>
+    </main>
+  </body>
+</html>
